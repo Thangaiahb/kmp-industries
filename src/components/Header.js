@@ -1,121 +1,86 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import {
-    MapPin,
-    Mail,
-    Phone,
-    ChevronDown,
-    X,
-} from "lucide-react";
+
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+const productLinks = [
+    {
+        name: "Borewell Submersible Pumps",
+        href: "/products/borewell-submersible-pumps",
+    },
+    {
+        name: "Openwell Submersible Pumps",
+        href: "/products/openwell-pumps",
+    },
+    {
+        name: "Monoblock Pumps",
+        href: "/products/monoblock-pumps",
+    },
+    {
+        name: "Submersible Motors",
+        href: "/products/motors",
+    },
+    {
+        name: "uPVC Column Pipes",
+        href: "/products/upvc-column-pipes",
+    },
+];
+
+const navLinks = [
+    {
+        name: "Home",
+        href: "/",
+    },
+    {
+        name: "About Us",
+        href: "/about",
+    },
+    {
+        name: "Applications",
+        href: "/applications",
+    },
+    {
+        name: "Quality",
+        href: "/quality",
+    },
+    {
+        name: "Contact",
+        href: "/contact",
+    },
+];
 
 export default function Header() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const [productsOpen, setProductsOpen] = useState(false);
 
-    /* =========================================
-       SCROLL EFFECT
-    ========================================= */
-
+    /* Lock body scroll when mobile menu opens */
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-
-        window.addEventListener("scroll", handleScroll);
+        document.body.style.overflow = mobileOpen ? "hidden" : "";
 
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            document.body.style.overflow = "";
         };
-    }, []);
+    }, [mobileOpen]);
 
-
-    /* =========================================
-       CLOSE MOBILE MENU
-    ========================================= */
-
-    const closeMenu = () => {
-        setMenuOpen(false);
+    const closeMobileMenu = () => {
+        setMobileOpen(false);
+        setProductsOpen(false);
     };
-
-
-    /* =========================================
-       BODY SCROLL LOCK
-    ========================================= */
-
-    useEffect(() => {
-        if (menuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [menuOpen]);
-
 
     return (
         <>
-            {/* =================================================
-                TOP BAR
-            ================================================= */}
+            {/* =====================================================
+                DESKTOP / HERO HEADER
+            ===================================================== */}
 
-            <div className="kmp-topbar">
+            <header className="absolute left-0 top-0 z-50 w-full">
 
-                <div className="container kmp-topbar-inner">
-
-                    {/* Left */}
-
-                    <div className="kmp-topbar-left">
-
-                        <span>
-                            <MapPin size={14} />
-                            Coimbatore, Tamil Nadu
-                        </span>
-
-                        <span>
-                            <Mail size={14} />
-                            info@kmpindustries.com
-                        </span>
-
-                    </div>
-
-
-                    {/* Right */}
-
-                    <div className="kmp-topbar-right">
-
-                        <span>
-                            <Phone size={14} />
-                            +91 98765 43210
-                        </span>
-
-                        <Link href="/contact">
-                            Dealer Enquiry →
-                        </Link>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            {/* =================================================
-                MAIN HEADER
-            ================================================= */}
-
-            <header
-                className={`kmp-header ${scrolled ? "kmp-header-scrolled" : ""
-                    }`}
-            >
-
-                <div className="container kmp-header-container">
+                <div className="mx-auto flex h-[90px] max-w-[1380px] items-center justify-between px-5 sm:px-8 lg:px-10">
 
                     {/* =================================================
                         LOGO
@@ -123,15 +88,13 @@ export default function Header() {
 
                     <Link
                         href="/"
-                        className="kmp-logo"
-                        onClick={closeMenu}
+                        onClick={closeMobileMenu}
+                        className="relative z-50 flex items-center"
                     >
-                        <Image
+                        <img
                             src="/images/logo/kmp-logo.png"
                             alt="KMP Industries Coimbatore"
-                            width={160}
-                            height={60}
-                            priority
+                            className="h-12 w-auto object-contain sm:h-14"
                         />
                     </Link>
 
@@ -140,404 +103,337 @@ export default function Header() {
                         DESKTOP NAVIGATION
                     ================================================= */}
 
-                    <nav className="kmp-desktop-nav">
+                    <nav className="hidden items-center gap-7 lg:flex">
 
-                        <NavLink href="/">
+                        {/* HOME */}
+
+                        <Link
+                            href="/"
+                            className="group relative py-4 text-[15px] font-semibold text-white transition duration-300 hover:text-white"
+                        >
                             Home
-                        </NavLink>
 
-                        <NavLink href="/about">
+                            <span className="absolute -bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-red-500" />
+                        </Link>
+
+
+                        {/* ABOUT */}
+
+                        <Link
+                            href="/about"
+                            className="py-4 text-[15px] font-semibold text-white/90 transition duration-300 hover:text-white"
+                        >
                             About Us
-                        </NavLink>
+                        </Link>
 
 
-                        {/* PRODUCTS */}
+                        {/* =================================================
+                            PRODUCTS DROPDOWN
+                        ================================================= */}
 
                         <div
-                            className="kmp-products-dropdown"
+                            className="group relative"
                             onMouseEnter={() => setProductsOpen(true)}
                             onMouseLeave={() => setProductsOpen(false)}
                         >
 
                             <Link
                                 href="/products"
-                                className="kmp-products-trigger"
+                                className="flex items-center gap-1 py-4 text-[15px] font-semibold text-white/90 transition duration-300 hover:text-white"
                             >
                                 Products
 
-                                <ChevronDown
-                                    size={15}
-                                    className={
-                                        productsOpen
-                                            ? "kmp-arrow-open"
-                                            : ""
-                                    }
+                                <KeyboardArrowDownIcon
+                                    className={`transition-transform duration-300 ${productsOpen
+                                        ? "rotate-180"
+                                        : ""
+                                        }`}
+                                    sx={{ fontSize: 18 }}
                                 />
                             </Link>
 
 
-                            {/* Dropdown */}
+                            {/* DROPDOWN */}
 
                             <div
-                                className={`kmp-dropdown-menu ${productsOpen
-                                    ? "kmp-dropdown-visible"
-                                    : ""
+                                className={`absolute left-1/2 top-[62px] w-[290px] -translate-x-1/2 rounded-2xl border border-white/20 bg-white p-2 shadow-2xl backdrop-blur-xl transition-all duration-300 ${productsOpen
+                                    ? "visible translate-y-0 opacity-100"
+                                    : "invisible -translate-y-2 opacity-0"
                                     }`}
                             >
 
-                                <DropdownLink
-                                    href="/products/borewell-submersible-pumps"
-                                >
-                                    Borewell Submersible Pumps
-                                </DropdownLink>
+                                {productLinks.map((product) => (
+                                    <Link
+                                        key={product.href}
+                                        href={product.href}
+                                        className="group/item flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-red-50 hover:text-red-600"
+                                    >
 
-                                <DropdownLink
-                                    href="/products/openwell-pumps"
-                                >
-                                    Openwell Submersible Pumps
-                                </DropdownLink>
+                                        <span>
+                                            {product.name}
+                                        </span>
 
-                                <DropdownLink
-                                    href="/products/monoblock-pumps"
-                                >
-                                    Monoblock Pumps
-                                </DropdownLink>
+                                        <ArrowOutwardIcon
+                                            className="opacity-0 transition-all duration-200 group-hover/item:translate-x-1 group-hover/item:opacity-100"
+                                            sx={{ fontSize: 16 }}
+                                        />
 
-                                <DropdownLink
-                                    href="/products/motors"
-                                >
-                                    Submersible Motors
-                                </DropdownLink>
-
-                                <DropdownLink
-                                    href="/products/upvc-column-pipes"
-                                >
-                                    uPVC Column Pipes
-                                </DropdownLink>
+                                    </Link>
+                                ))}
 
                             </div>
 
                         </div>
 
 
-                        <NavLink href="/applications">
-                            Applications
-                        </NavLink>
+                        {/* OTHER NAV LINKS */}
 
-                        <NavLink href="/quality">
-                            Quality
-                        </NavLink>
-
-                        <NavLink href="/contact">
-                            Contact
-                        </NavLink>
-
-
-                        {/* GET A QUOTE */}
-
-                        <Link
-                            href="/contact"
-                            className="header-quote-btn"
-                        >
-                            <span className="quote-text">
-                                Get a Quote
-                            </span>
-
-                            <span className="quote-arrow">
-                                →
-                            </span>
-                        </Link>
+                        {navLinks.slice(2).map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className="py-4 text-[15px] font-semibold text-white/90 transition duration-300 hover:text-white"
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
 
                     </nav>
 
 
                     {/* =================================================
-                        MOBILE HAMBURGER
+                        GET A QUOTE
+                    ================================================= */}
+
+                    <Link
+                        href="/contact"
+                        className="hidden items-center gap-3 rounded-full bg-red-600 py-3 pl-6 pr-3 text-sm font-bold text-white shadow-lg shadow-red-600/25 transition-all duration-300 hover:scale-105 hover:bg-red-700 lg:flex"
+                    >
+
+                        <span>
+                            Get a Quote
+                        </span>
+
+                        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-red-600 transition-transform duration-300">
+                            <ArrowOutwardIcon sx={{ fontSize: 18 }} />
+                        </span>
+
+                    </Link>
+
+
+                    {/* =================================================
+                        MOBILE MENU BUTTON
                     ================================================= */}
 
                     <button
                         type="button"
-                        className={`kmp-mobile-toggle ${menuOpen
-                            ? "kmp-mobile-toggle-open"
-                            : ""
-                            }`}
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label={
-                            menuOpen
-                                ? "Close menu"
-                                : "Open menu"
-                        }
-                        aria-expanded={menuOpen}
+                        onClick={() => setMobileOpen(true)}
+                        aria-label="Open navigation menu"
+                        className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-900 shadow-lg lg:hidden"
                     >
+                        <MenuIcon />
+                    </button>
 
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                </div>
+            </header>
 
+
+            {/* =====================================================
+                MOBILE OVERLAY
+            ===================================================== */}
+
+            <div
+                onClick={closeMobileMenu}
+                className={`fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen
+                    ? "visible opacity-100"
+                    : "invisible opacity-0"
+                    }`}
+            />
+
+
+            {/* =====================================================
+                MOBILE DRAWER
+            ===================================================== */}
+
+            <aside
+                className={`fixed right-0 top-0 z-[70] flex h-full w-[88%] max-w-[390px] flex-col bg-white shadow-2xl transition-transform duration-500 ease-out lg:hidden ${mobileOpen
+                    ? "translate-x-0"
+                    : "translate-x-full"
+                    }`}
+            >
+
+                {/* MOBILE HEADER */}
+
+                <div className="flex h-[90px] items-center justify-between border-b border-gray-100 px-6">
+
+                    <Link
+                        href="/"
+                        onClick={closeMobileMenu}
+                    >
+                        <img
+                            src="/images/logo/kmp-logo.png"
+                            alt="KMP Industries"
+                            className="h-12 w-auto"
+                        />
+                    </Link>
+
+                    <button
+                        type="button"
+                        onClick={closeMobileMenu}
+                        aria-label="Close navigation menu"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-800 transition hover:bg-red-50 hover:text-red-600"
+                    >
+                        <CloseIcon />
                     </button>
 
                 </div>
 
 
-                {/* =================================================
-                    MOBILE OVERLAY
-                ================================================= */}
+                {/* MOBILE LINKS */}
 
-                <div
-                    className={`kmp-mobile-overlay ${menuOpen
-                        ? "kmp-mobile-overlay-visible"
-                        : ""
-                        }`}
-                    onClick={closeMenu}
-                />
+                <nav className="flex-1 overflow-y-auto px-6 py-7">
+
+                    <Link
+                        href="/"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between border-b border-gray-100 py-5 text-lg font-bold text-gray-900"
+                    >
+                        Home
+                        <ArrowOutwardIcon sx={{ fontSize: 19 }} />
+                    </Link>
 
 
-                {/* =================================================
-                    MOBILE MENU
-                ================================================= */}
+                    <Link
+                        href="/about"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between border-b border-gray-100 py-5 text-lg font-bold text-gray-900"
+                    >
+                        About Us
+                        <ArrowOutwardIcon sx={{ fontSize: 19 }} />
+                    </Link>
 
-                <aside
-                    className={`kmp-mobile-menu ${menuOpen
-                        ? "kmp-mobile-menu-open"
-                        : ""
-                        }`}
-                >
 
-                    {/* Mobile Header */}
+                    {/* MOBILE PRODUCTS */}
 
-                    <div className="kmp-mobile-menu-header">
-
-                        <Link
-                            href="/"
-                            onClick={closeMenu}
-                        >
-                            <Image
-                                src="/images/logo/kmp-logo.png"
-                                alt="KMP Industries"
-                                width={130}
-                                height={50}
-                            />
-                        </Link>
-
+                    <div className="border-b border-gray-100">
 
                         <button
                             type="button"
-                            onClick={closeMenu}
-                            className="kmp-mobile-close"
-                            aria-label="Close menu"
+                            onClick={() =>
+                                setProductsOpen(!productsOpen)
+                            }
+                            className="flex w-full items-center justify-between py-5 text-left text-lg font-bold text-gray-900"
                         >
-                            <X size={23} />
+                            Products
+
+                            <KeyboardArrowDownIcon
+                                className={`transition-transform duration-300 ${productsOpen
+                                    ? "rotate-180 text-red-600"
+                                    : ""
+                                    }`}
+                            />
                         </button>
 
-                    </div>
 
-
-                    {/* Mobile Navigation */}
-
-                    <div className="kmp-mobile-links">
-
-                        <MobileLink
-                            href="/"
-                            onClick={closeMenu}
+                        <div
+                            className={`overflow-hidden transition-all duration-300 ${productsOpen
+                                ? "max-h-[500px] pb-4"
+                                : "max-h-0"
+                                }`}
                         >
-                            Home
-                        </MobileLink>
 
-                        <MobileLink
-                            href="/about"
-                            onClick={closeMenu}
-                        >
-                            About Us
-                        </MobileLink>
-
-
-                        {/* Mobile Products */}
-
-                        <div className="kmp-mobile-products">
-
-                            <MobileLink
-                                href="/products"
-                                onClick={closeMenu}
-                            >
-                                Products
-                            </MobileLink>
-
-                            <div className="kmp-mobile-submenu">
-
+                            {productLinks.map((product) => (
                                 <Link
-                                    href="/products/borewell-submersible-pumps"
-                                    onClick={closeMenu}
+                                    key={product.href}
+                                    href={product.href}
+                                    onClick={closeMobileMenu}
+                                    className="flex items-center justify-between rounded-lg px-3 py-3 text-sm font-medium text-gray-600 transition hover:bg-red-50 hover:text-red-600"
                                 >
-                                    Borewell Submersible Pumps
+                                    {product.name}
+
+                                    <ArrowOutwardIcon
+                                        sx={{ fontSize: 16 }}
+                                    />
                                 </Link>
+                            ))}
 
-                                <Link
-                                    href="/products/openwell-pumps"
-                                    onClick={closeMenu}
-                                >
-                                    Openwell Submersible Pumps
-                                </Link>
-
-                                <Link
-                                    href="/products/monoblock-pumps"
-                                    onClick={closeMenu}
-                                >
-                                    Monoblock Pumps
-                                </Link>
-
-                                <Link
-                                    href="/products/motors"
-                                    onClick={closeMenu}
-                                >
-                                    Submersible Motors
-                                </Link>
-
-                                <Link
-                                    href="/products/upvc-column-pipes"
-                                    onClick={closeMenu}
-                                >
-                                    uPVC Column Pipes
-                                </Link>
-
-                            </div>
-
-                        </div>
-
-
-                        <MobileLink
-                            href="/applications"
-                            onClick={closeMenu}
-                        >
-                            Applications
-                        </MobileLink>
-
-                        <MobileLink
-                            href="/quality"
-                            onClick={closeMenu}
-                        >
-                            Quality
-                        </MobileLink>
-
-                        <MobileLink
-                            href="/contact"
-                            onClick={closeMenu}
-                        >
-                            Contact
-                        </MobileLink>
-
-
-                        {/* Mobile Get A Quote */}
-
-                        <Link
-                            href="/contact"
-                            onClick={closeMenu}
-                            className="mobile-quote-btn"
-                        >
-                            <span>
-                                Get a Quote
-                            </span>
-
-                            <span>
-                                →
-                            </span>
-                        </Link>
-
-                    </div>
-
-
-                    {/* Mobile Contact */}
-
-                    <div className="kmp-mobile-contact">
-
-                        <div>
-                            <MapPin size={16} />
-                            <span>
-                                Coimbatore, Tamil Nadu
-                            </span>
-                        </div>
-
-                        <div>
-                            <Mail size={16} />
-                            <span>
-                                info@kmpindustries.com
-                            </span>
-                        </div>
-
-                        <div>
-                            <Phone size={16} />
-                            <span>
-                                +91 98765 43210
-                            </span>
                         </div>
 
                     </div>
 
-                </aside>
 
-            </header>
+                    {/* APPLICATIONS */}
+
+                    <Link
+                        href="/applications"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between border-b border-gray-100 py-5 text-lg font-bold text-gray-900"
+                    >
+                        Applications
+                        <ArrowOutwardIcon sx={{ fontSize: 19 }} />
+                    </Link>
+
+
+                    {/* QUALITY */}
+
+                    <Link
+                        href="/quality"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between border-b border-gray-100 py-5 text-lg font-bold text-gray-900"
+                    >
+                        Quality
+                        <ArrowOutwardIcon sx={{ fontSize: 19 }} />
+                    </Link>
+
+
+                    {/* CONTACT */}
+
+                    <Link
+                        href="/contact"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between border-b border-gray-100 py-5 text-lg font-bold text-gray-900"
+                    >
+                        Contact
+                        <ArrowOutwardIcon sx={{ fontSize: 19 }} />
+                    </Link>
+
+
+                    {/* MOBILE CTA */}
+
+                    <Link
+                        href="/contact"
+                        onClick={closeMobileMenu}
+                        className="mt-8 flex items-center justify-between rounded-full bg-red-600 px-6 py-3 text-base font-bold text-white shadow-lg shadow-red-600/20"
+                    >
+
+                        <span>
+                            Get a Quote
+                        </span>
+
+                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-red-600">
+                            <ArrowOutwardIcon sx={{ fontSize: 19 }} />
+                        </span>
+
+                    </Link>
+
+                </nav>
+
+
+                {/* MOBILE FOOTER */}
+
+                <div className="border-t border-gray-100 px-6 py-6">
+
+                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+                        KMP Industries
+                    </p>
+
+                    <p className="mt-2 text-sm text-gray-500">
+                        Coimbatore, Tamil Nadu
+                    </p>
+
+                </div>
+
+            </aside>
         </>
-    );
-}
-
-
-/* =========================================================
-   DESKTOP NAV LINK
-========================================================= */
-
-function NavLink({ href, children }) {
-    return (
-        <Link
-            href={href}
-            className="kmp-nav-link"
-        >
-            {children}
-
-            <span className="kmp-nav-line"></span>
-        </Link>
-    );
-}
-
-
-/* =========================================================
-   DROPDOWN LINK
-========================================================= */
-
-function DropdownLink({ href, children }) {
-    return (
-        <Link
-            href={href}
-            className="kmp-dropdown-link"
-        >
-            <span>{children}</span>
-
-            <span className="dropdown-arrow">
-                →
-            </span>
-        </Link>
-    );
-}
-
-
-/* =========================================================
-   MOBILE LINK
-========================================================= */
-
-function MobileLink({
-    href,
-    children,
-    onClick,
-}) {
-    return (
-        <Link
-            href={href}
-            onClick={onClick}
-            className="kmp-mobile-link"
-        >
-            {children}
-
-            <span>
-                →
-            </span>
-        </Link>
     );
 }

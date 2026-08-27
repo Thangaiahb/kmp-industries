@@ -4,12 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 const slides = [
     {
         video: "/videos/hero/one.mp4",
         tag: "KMP INDUSTRIES · COIMBATORE",
-        title: "KMP Industries:",
-        highlight: "Energy-Efficient Submersible Pumps & uPVC Column Pipes",
+        title: "Energy-Efficient",
+        highlight: "Submersible Pumps",
+        secondHighlight: "& uPVC Column Pipes",
         description:
             "Reliable pumping solutions engineered for agriculture, residential and industrial water management.",
         primary: "Explore Products",
@@ -20,6 +24,7 @@ const slides = [
         tag: "ENGINEERED FOR PERFORMANCE",
         title: "Powering Water.",
         highlight: "Built for Reliability.",
+        secondHighlight: "",
         description:
             "High-performance pumps and motors designed for dependable water pumping across demanding applications.",
         primary: "View Our Products",
@@ -30,6 +35,7 @@ const slides = [
         tag: "QUALITY · ENGINEERING · TRUST",
         title: "Reliable Solutions",
         highlight: "For Every Water Need.",
+        secondHighlight: "",
         description:
             "From agricultural irrigation to residential and industrial applications, choose pumping solutions built to perform.",
         primary: "Discover KMP",
@@ -39,9 +45,9 @@ const slides = [
 
 export default function Hero() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [videoDuration, setVideoDuration] = useState(0);
-    const [videoProgress, setVideoProgress] = useState(0);
-    const [isVideoReady, setIsVideoReady] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [videoReady, setVideoReady] = useState(false);
 
     const videoRef = useRef(null);
 
@@ -52,77 +58,88 @@ export default function Hero() {
     ===================================================== */
 
     const changeSlide = (index) => {
-        setVideoProgress(0);
-        setVideoDuration(0);
-        setIsVideoReady(false);
+        setProgress(0);
+        setDuration(0);
+        setVideoReady(false);
         setCurrentSlide(index);
     };
 
+
     /* =====================================================
-       VIDEO READY
+       VIDEO LOADED
     ===================================================== */
 
-    const handleVideoLoaded = () => {
-        if (!videoRef.current) return;
+    const handleLoadedMetadata = () => {
+        const video = videoRef.current;
 
-        const duration = videoRef.current.duration;
+        if (!video) return;
 
-        if (Number.isFinite(duration)) {
-            setVideoDuration(duration);
+        if (Number.isFinite(video.duration)) {
+            setDuration(video.duration);
         }
 
-        setIsVideoReady(true);
+        setVideoReady(true);
 
-        videoRef.current
-            .play()
-            .catch(() => { });
+        video.play().catch(() => { });
     };
+
 
     /* =====================================================
        VIDEO PROGRESS
     ===================================================== */
 
-    const handleVideoTimeUpdate = () => {
-        if (!videoRef.current) return;
+    const handleTimeUpdate = () => {
+        const video = videoRef.current;
 
-        const currentTime = videoRef.current.currentTime;
-        const duration = videoRef.current.duration;
+        if (!video) return;
 
-        if (!duration || !Number.isFinite(duration)) return;
+        if (
+            !video.duration ||
+            !Number.isFinite(video.duration)
+        ) {
+            return;
+        }
 
-        setVideoProgress((currentTime / duration) * 100);
+        const percentage =
+            (video.currentTime / video.duration) * 100;
+
+        setProgress(percentage);
     };
+
 
     /* =====================================================
        VIDEO END
     ===================================================== */
 
     const handleVideoEnded = () => {
-        const nextSlide = (currentSlide + 1) % slides.length;
+        const next =
+            (currentSlide + 1) % slides.length;
 
-        changeSlide(nextSlide);
+        changeSlide(next);
     };
 
+
     /* =====================================================
-       RESET VIDEO WHEN SLIDE CHANGES
+       RESET VIDEO
     ===================================================== */
 
     useEffect(() => {
-        setVideoProgress(0);
-        setVideoDuration(0);
-        setIsVideoReady(false);
+        setProgress(0);
+        setDuration(0);
+        setVideoReady(false);
 
-        if (videoRef.current) {
-            videoRef.current.currentTime = 0;
+        const video = videoRef.current;
 
-            videoRef.current
-                .play()
-                .catch(() => { });
-        }
+        if (!video) return;
+
+        video.currentTime = 0;
+
+        video.play().catch(() => { });
     }, [currentSlide]);
 
+
     return (
-        <section className="kmp-hero">
+        <section className="relative min-h-[720px] h-screen w-full overflow-hidden bg-black">
 
             {/* =================================================
                 VIDEO BACKGROUND
@@ -132,31 +149,25 @@ export default function Hero() {
 
                 <motion.div
                     key={slide.video}
-                    className="kmp-hero-video-wrapper"
-
+                    className="absolute inset-0 z-0"
                     initial={{
                         opacity: 0,
-                        scale: 1.04,
+                        scale: 1.05,
                     }}
-
                     animate={{
                         opacity: 1,
                         scale: 1,
                     }}
-
                     exit={{
                         opacity: 0,
                         scale: 1.02,
                     }}
-
                     transition={{
                         opacity: {
-                            duration: 0.8,
-                            ease: "easeInOut",
+                            duration: 0.9,
                         },
-
                         scale: {
-                            duration: 1.2,
+                            duration: 1.4,
                             ease: "easeOut",
                         },
                     }}
@@ -165,23 +176,15 @@ export default function Hero() {
                     <video
                         ref={videoRef}
                         key={slide.video}
-                        className="kmp-hero-video"
-
                         src={slide.video}
-
                         autoPlay
                         muted
                         playsInline
-
-                        preload={
-                            currentSlide === 0
-                                ? "auto"
-                                : "metadata"
-                        }
-
-                        onLoadedMetadata={handleVideoLoaded}
-                        onTimeUpdate={handleVideoTimeUpdate}
+                        preload="auto"
+                        onLoadedMetadata={handleLoadedMetadata}
+                        onTimeUpdate={handleTimeUpdate}
                         onEnded={handleVideoEnded}
+                        className="h-full w-full object-cover"
                     />
 
                 </motion.div>
@@ -193,73 +196,69 @@ export default function Hero() {
                 DARK OVERLAY
             ================================================= */}
 
-            <div className="kmp-hero-overlay"></div>
+            <div className="absolute inset-0 z-10 bg-black/30" />
+
+            <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
+
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-transparent to-black/30" />
 
 
             {/* =================================================
-                BOTTOM GRADIENT
+                HERO CONTENT
             ================================================= */}
 
-            <div className="kmp-hero-bottom-gradient"></div>
-
-
-            {/* =================================================
-                CONTENT
-            ================================================= */}
-
-            <div className="container kmp-hero-container">
+            <div className="relative z-20 flex h-full items-center justify-center px-5 pt-24 sm:px-8 lg:px-10">
 
                 <AnimatePresence mode="wait">
 
                     <motion.div
                         key={currentSlide}
-                        className="kmp-hero-content"
-
                         initial={{
                             opacity: 0,
                             y: 35,
                         }}
-
                         animate={{
                             opacity: 1,
                             y: 0,
                         }}
-
                         exit={{
                             opacity: 0,
                             y: -25,
                         }}
-
                         transition={{
                             duration: 0.7,
                             ease: [0.22, 1, 0.36, 1],
                         }}
+                        className="mx-auto w-full max-w-6xl text-center"
                     >
 
                         {/* =================================================
                             TAG
                         ================================================= */}
 
-                        <motion.span
-                            className="kmp-hero-tag"
-
+                        <motion.div
                             initial={{
                                 opacity: 0,
-                                x: -25,
+                                y: -15,
                             }}
-
                             animate={{
                                 opacity: 1,
-                                x: 0,
+                                y: 0,
                             }}
-
                             transition={{
                                 delay: 0.15,
                                 duration: 0.5,
                             }}
+                            className="mx-auto mb-7 inline-flex items-center rounded-full border border-white/25 bg-white/10 px-5 py-2 backdrop-blur-md"
                         >
-                            {slide.tag}
-                        </motion.span>
+
+                            <span className="mr-2 h-2 w-2 rounded-full bg-red-500" />
+
+                            <span className="text-[10px] font-bold uppercase tracking-[2px] text-white sm:text-xs">
+                                {slide.tag}
+                            </span>
+
+                        </motion.div>
 
 
                         {/* =================================================
@@ -271,25 +270,34 @@ export default function Hero() {
                                 opacity: 0,
                                 y: 25,
                             }}
-
                             animate={{
                                 opacity: 1,
                                 y: 0,
                             }}
-
                             transition={{
                                 delay: 0.25,
                                 duration: 0.7,
                             }}
+                            className="mx-auto max-w-6xl text-[44px] font-extrabold leading-[0.98] tracking-[-2px] text-white sm:text-6xl md:text-7xl lg:text-[82px] xl:text-[92px]"
                         >
 
                             {slide.title}
 
                             <br />
 
-                            <span>
+                            <span className="text-white">
                                 {slide.highlight}
                             </span>
+
+                            {slide.secondHighlight && (
+                                <>
+                                    <br />
+
+                                    <span className="text-white">
+                                        {slide.secondHighlight}
+                                    </span>
+                                </>
+                            )}
 
                         </motion.h1>
 
@@ -303,16 +311,15 @@ export default function Hero() {
                                 opacity: 0,
                                 y: 20,
                             }}
-
                             animate={{
                                 opacity: 1,
                                 y: 0,
                             }}
-
                             transition={{
                                 delay: 0.4,
                                 duration: 0.6,
                             }}
+                            className="mx-auto mt-7 max-w-2xl text-base leading-7 text-white/85 sm:text-lg"
                         >
                             {slide.description}
                         </motion.p>
@@ -323,37 +330,46 @@ export default function Hero() {
                         ================================================= */}
 
                         <motion.div
-                            className="kmp-hero-buttons"
-
                             initial={{
                                 opacity: 0,
                                 y: 20,
                             }}
-
                             animate={{
                                 opacity: 1,
                                 y: 0,
                             }}
-
                             transition={{
                                 delay: 0.55,
                                 duration: 0.6,
                             }}
+                            className="mt-9 flex flex-wrap items-center justify-center gap-4"
                         >
+
+                            {/* PRIMARY */}
 
                             <Link
                                 href="/products"
-                                className="kmp-hero-primary"
+                                className="group flex items-center gap-3 rounded-full bg-red-600 py-2 pl-7 pr-2 text-sm font-bold text-white shadow-xl shadow-red-600/30 transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:text-base"
                             >
-                                {slide.primary}
 
-                                <span>→</span>
+                                <span>
+                                    {slide.primary}
+                                </span>
+
+                                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-red-600 transition-transform duration-300 group-hover:rotate-45">
+                                    <ArrowOutwardIcon
+                                        sx={{ fontSize: 19 }}
+                                    />
+                                </span>
+
                             </Link>
 
 
+                            {/* SECONDARY */}
+
                             <Link
                                 href="/contact"
-                                className="kmp-hero-secondary"
+                                className="rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-gray-900 sm:text-base"
                             >
                                 {slide.secondary}
                             </Link>
@@ -368,52 +384,45 @@ export default function Hero() {
 
 
             {/* =================================================
-                SLIDER CONTROLS
+                SLIDE CONTROLS
             ================================================= */}
 
-            <div className="kmp-hero-controls">
+            <div className="absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-3">
 
-                {/* Numbers */}
+                {/* NUMBERS */}
 
-                <div className="kmp-slide-numbers">
+                <div className="flex items-center gap-1">
 
                     {slides.map((_, index) => (
-
                         <button
                             key={index}
                             type="button"
-
                             onClick={() =>
                                 changeSlide(index)
                             }
-
-                            className={
-                                currentSlide === index
-                                    ? "active"
-                                    : ""
-                            }
-
-                            aria-label={`Go to slide ${index + 1}`}
+                            aria-label={`Go to slide ${index + 1
+                                }`}
+                            className={`px-3 py-1 text-xs font-bold transition-all duration-300 ${currentSlide === index
+                                ? "text-white"
+                                : "text-white/40 hover:text-white"
+                                }`}
                         >
                             0{index + 1}
                         </button>
-
                     ))}
 
                 </div>
 
 
-                {/* Progress Bar */}
+                {/* PROGRESS */}
 
-                <div className="kmp-progress">
+                <div className="h-[2px] w-32 overflow-hidden rounded-full bg-white/25 sm:w-48">
 
                     <motion.div
-                        className="kmp-progress-bar"
-
+                        className="h-full bg-red-500"
                         animate={{
-                            width: `${videoProgress}%`,
+                            width: `${progress}%`,
                         }}
-
                         transition={{
                             duration: 0.1,
                             ease: "linear",
@@ -422,16 +431,18 @@ export default function Hero() {
 
                 </div>
 
-
-                {/* Duration */}
-
-                {isVideoReady && videoDuration > 0 && (
-                    <span className="kmp-video-time">
-                        {Math.ceil(videoDuration)}s
-                    </span>
-                )}
-
             </div>
+
+
+            {/* =================================================
+                VIDEO TIME
+            ================================================= */}
+
+            {videoReady && duration > 0 && (
+                <div className="absolute bottom-10 right-6 z-30 hidden text-xs font-semibold tracking-widest text-white/60 sm:block lg:right-10">
+                    {Math.ceil(duration)} SEC
+                </div>
+            )}
 
 
             {/* =================================================
@@ -439,24 +450,35 @@ export default function Hero() {
             ================================================= */}
 
             <motion.div
-                className="kmp-hero-scroll"
-
                 animate={{
                     y: [0, 8, 0],
                 }}
-
                 transition={{
                     duration: 2,
                     repeat: Infinity,
                     ease: "easeInOut",
                 }}
+                className="absolute bottom-9 left-6 z-30 hidden items-center gap-3 text-[10px] font-bold uppercase tracking-[3px] text-white/60 md:flex lg:left-10"
             >
 
-                <span>Scroll</span>
+                <span>
+                    Scroll
+                </span>
 
-                <div></div>
+                <span className="h-px w-10 bg-white/40" />
+
+                <KeyboardArrowDownIcon
+                    sx={{ fontSize: 16 }}
+                />
 
             </motion.div>
+
+
+            {/* =================================================
+                RED ACCENT
+            ================================================= */}
+
+            <div className="absolute bottom-0 left-0 z-30 h-1 w-full bg-gradient-to-r from-red-600 via-red-500 to-transparent" />
 
         </section>
     );
