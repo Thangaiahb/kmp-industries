@@ -384,34 +384,14 @@ export default function Hero() {
 
 
             {/* =================================================
-                SLIDE CONTROLS
-            ================================================= */}
+    SLIDE CONTROLS
+================================================= */}
 
-            <div className="absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-3">
+            <div className="absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-5">
 
                 {/* NUMBERS */}
 
-                <div className="flex items-center gap-1">
 
-                    {slides.map((_, index) => (
-                        <button
-                            key={index}
-                            type="button"
-                            onClick={() =>
-                                changeSlide(index)
-                            }
-                            aria-label={`Go to slide ${index + 1
-                                }`}
-                            className={`px-3 py-1 text-xs font-bold transition-all duration-300 ${currentSlide === index
-                                ? "text-white"
-                                : "text-white/40 hover:text-white"
-                                }`}
-                        >
-                            0{index + 1}
-                        </button>
-                    ))}
-
-                </div>
 
 
                 {/* PROGRESS */}
@@ -432,17 +412,6 @@ export default function Hero() {
                 </div>
 
             </div>
-
-
-            {/* =================================================
-                VIDEO TIME
-            ================================================= */}
-
-            {videoReady && duration > 0 && (
-                <div className="absolute bottom-10 right-6 z-30 hidden text-xs font-semibold tracking-widest text-white/60 sm:block lg:right-10">
-                    {Math.ceil(duration)} SEC
-                </div>
-            )}
 
 
             {/* =================================================

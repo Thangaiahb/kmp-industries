@@ -10,114 +10,361 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import TuneIcon from "@mui/icons-material/Tune";
 import CloseIcon from "@mui/icons-material/Close";
 
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
 const products = [
     {
         id: 1,
-        name: "Borewell Submersible Pumps",
+        name: "V3 Submersible Pump",
         category: "Submersible Pumps",
-        image: "/images/products/borewell-submersible-pumps.png",
+        image: "/images/products/v3-submersible.jpeg",
         description:
-            "Reliable borewell submersible pumping solutions designed for agricultural, residential and industrial water applications.",
+            "Reliable submersible pumping solution designed for dependable water pumping applications.",
         link: "/products/borewell-submersible-pumps",
     },
+
     {
         id: 2,
-        name: "Stainless Steel Borewell Submersible Pumps",
+        name: "V4 Submersible Pump",
         category: "Submersible Pumps",
-        image: "/images/products/stainless-steel-borewell-submersible-pumps.png",
+        image: "/images/products/v4-submersible.jpeg",
         description:
-            "Durable stainless steel borewell submersible pumps designed for dependable performance and corrosion resistance.",
-        link: "/products/stainless-steel-borewell-submersible-pumps",
+            "Dependable submersible pump designed for efficient and consistent water pumping performance.",
+        link: "/products/borewell-submersible-pumps",
     },
+
     {
         id: 3,
-        name: "Single Phase Openwell Submersible Pumps",
-        category: "Openwell Pumps",
-        image: "/images/products/single-phase-openwell-submersible-pumps.png",
+        name: "V4 S.S. Submersible Pump",
+        category: "Submersible Pumps",
+        image: "/images/products/v4-ss-submersible.jpeg",
         description:
-            "Efficient single phase openwell submersible pumps for reliable domestic and agricultural water pumping.",
-        link: "/products/single-phase-openwell-submersible-pumps",
+            "Stainless steel submersible pumping solution designed for durability and reliable operation.",
+        link: "/products/stainless-steel-borewell-submersible-pumps",
     },
+
     {
         id: 4,
-        name: "Three Phase Vertical Openwell Submersible Pumps",
-        category: "Openwell Pumps",
-        image: "/images/products/three-phase-vertical-openwell-submersible-pumps.png",
+        name: "V4 S.S. Submersible Pump - 1",
+        category: "Submersible Pumps",
+        image: "/images/products/v4-ss-submersible-1.jpeg",
         description:
-            "Three phase vertical openwell pumping solutions engineered for dependable water supply and demanding applications.",
-        link: "/products/three-phase-vertical-openwell-submersible-pumps",
+            "Stainless steel submersible pump designed for dependable water pumping applications.",
+        link: "/products/stainless-steel-borewell-submersible-pumps",
     },
+
     {
         id: 5,
-        name: "Self Priming Monoblock Pumps",
-        category: "Monoblock Pumps",
-        image: "/images/products/self-priming-monoblock-pumps.png",
+        name: "V5 Submersible Pump",
+        category: "Submersible Pumps",
+        image: "/images/products/v5-submersible.jpeg",
         description:
-            "Self priming monoblock pumps designed for efficient and reliable water pumping across multiple applications.",
-        link: "/products/self-priming-monoblock-pumps",
+            "Reliable V5 submersible pumping solution designed for consistent water delivery.",
+        link: "/products/borewell-submersible-pumps",
     },
+
     {
         id: 6,
-        name: "Centrifugal Monoblock Pumps",
-        category: "Monoblock Pumps",
-        image: "/images/products/centrifugal-monoblock-pumps.png",
+        name: "V5 Submersible Pump - 1",
+        category: "Submersible Pumps",
+        image: "/images/products/v5-submersible-1.jpeg",
         description:
-            "Centrifugal monoblock pumps built for consistent water flow and reliable long-term operation.",
-        link: "/products/centrifugal-monoblock-pumps",
+            "V5 submersible pump designed for reliable performance across water pumping applications.",
+        link: "/products/borewell-submersible-pumps",
     },
+
     {
         id: 7,
-        name: "UPVC Column Pipes",
-        category: "Pipes & Accessories",
-        image: "/images/products/upvc-column-pipes.png",
+        name: "V5 Submersible Pump - 2",
+        category: "Submersible Pumps",
+        image: "/images/products/v5-submersible-2.jpeg",
         description:
-            "Heavy-duty uPVC column pipes designed for durable and corrosion-resistant borewell pumping installations.",
-        link: "/products/upvc-column-pipes",
+            "Dependable V5 submersible pumping solution engineered for consistent operation.",
+        link: "/products/borewell-submersible-pumps",
     },
+
     {
         id: 8,
-        name: "Submersible Flat Cables",
-        category: "Pipes & Accessories",
-        image: "/images/products/submersible-flat-cables.png",
+        name: "V6 Submersible Pump",
+        category: "Submersible Pumps",
+        image: "/images/products/v6-rf.jpeg",
         description:
-            "Reliable flat cables designed for submersible pump installations and dependable electrical connectivity.",
-        link: "/products/submersible-flat-cables",
+            "V6 submersible pump designed for reliable water pumping and dependable performance.",
+        link: "/products/borewell-submersible-pumps",
+    },
+
+    {
+        id: 9,
+        name: "V6 Single Phase",
+        category: "Submersible Pumps",
+        image: "/images/products/v6-single-phase.jpeg",
+        description:
+            "Single phase V6 submersible pumping solution designed for dependable water supply applications.",
+        link: "/products/borewell-submersible-pumps",
+    },
+
+    {
+        id: 10,
+        name: "V6 SS Models",
+        category: "Submersible Pumps",
+        image: "/images/products/v6-ss-models.jpeg",
+        description:
+            "Stainless steel V6 pumping models designed for durable and reliable operation.",
+        link: "/products/stainless-steel-borewell-submersible-pumps",
+    },
+
+    {
+        id: 11,
+        name: "V6 Submersible Pump - M/F",
+        category: "Submersible Pumps",
+        image: "/images/products/v6-mf.jpeg",
+        description:
+            "V6 submersible pump solution designed for dependable water pumping applications.",
+        link: "/products/borewell-submersible-pumps",
+    },
+
+    {
+        id: 12,
+        name: "V6 Submersible Pump - 50 ft",
+        category: "Submersible Pumps",
+        image: "/images/products/v6-50ft.jpeg",
+        description:
+            "V6 submersible pumping solution designed for reliable water pumping requirements.",
+        link: "/products/borewell-submersible-pumps",
+    },
+
+
+    /* =========================================================
+       OPENWELL
+    ========================================================= */
+
+    {
+        id: 13,
+        name: "Single Phase Openwell Submersible Pump",
+        category: "Openwell Pumps",
+        image: "/images/products/openwell-1-phase.jpeg",
+        description:
+            "Single phase openwell submersible pumping solution for dependable domestic and agricultural water supply.",
+        link: "/products/single-phase-openwell-submersible-pumps",
+    },
+
+    {
+        id: 14,
+        name: "Horizontal Openwell Economic",
+        category: "Openwell Pumps",
+        image: "/images/products/horizontal-openwell-economic.jpeg",
+        description:
+            "Horizontal openwell pumping solution designed for reliable and economical water pumping.",
+        link: "/products/single-phase-openwell-submersible-pumps",
+    },
+
+    {
+        id: 15,
+        name: "Horizontal Openwell 3 Phase",
+        category: "Openwell Pumps",
+        image: "/images/products/horizontal-openwell-3-phase.jpeg",
+        description:
+            "Three phase horizontal openwell pumping solution designed for dependable water supply.",
+        link: "/products/three-phase-vertical-openwell-submersible-pumps",
+    },
+
+    {
+        id: 16,
+        name: "Vertical Openwell",
+        category: "Openwell Pumps",
+        image: "/images/products/vertical-openwell.jpeg",
+        description:
+            "Vertical openwell pumping solution designed for reliable water pumping applications.",
+        link: "/products/three-phase-vertical-openwell-submersible-pumps",
+    },
+
+    {
+        id: 17,
+        name: "Vertical Openwell 1 Phase",
+        category: "Openwell Pumps",
+        image: "/images/products/vertical-openwell-1-phase.jpeg",
+        description:
+            "Single phase vertical openwell pump designed for dependable water supply applications.",
+        link: "/products/single-phase-openwell-submersible-pumps",
+    },
+
+    {
+        id: 18,
+        name: "Vertical Openwell - 1",
+        category: "Openwell Pumps",
+        image: "/images/products/vertical-openwell-1.jpeg",
+        description:
+            "Reliable vertical openwell pumping solution for consistent water delivery.",
+        link: "/products/three-phase-vertical-openwell-submersible-pumps",
+    },
+
+
+    /* =========================================================
+       MONOBLOCK / SURFACE
+    ========================================================= */
+
+    {
+        id: 19,
+        name: "Self Priming Pump",
+        category: "Monoblock Pumps",
+        image: "/images/products/self-priming.jpeg",
+        description:
+            "Self priming pumping solution designed for reliable and efficient water transfer.",
+        link: "/products/self-priming-monoblock-pumps",
+    },
+
+    {
+        id: 20,
+        name: "Magic Suction",
+        category: "Monoblock Pumps",
+        image: "/images/products/magic-suction.jpeg",
+        description:
+            "Efficient pumping solution designed for dependable suction and water delivery.",
+        link: "/products/self-priming-monoblock-pumps",
+    },
+
+    {
+        id: 21,
+        name: "DMS Pump",
+        category: "Monoblock Pumps",
+        image: "/images/products/dms.jpeg",
+        description:
+            "Reliable pumping solution designed for consistent performance across water applications.",
+        link: "/products/centrifugal-monoblock-pumps",
+    },
+
+    {
+        id: 22,
+        name: "Centrifugal Monoblock - 1 Phase",
+        category: "Monoblock Pumps",
+        image: "/images/products/centrifugal-mono-block-1-phase.jpeg",
+        description:
+            "Single phase centrifugal monoblock pump designed for reliable water pumping performance.",
+        link: "/products/centrifugal-monoblock-pumps",
+    },
+
+    {
+        id: 23,
+        name: "Centrifugal Monoblock - 3 Phase",
+        category: "Monoblock Pumps",
+        image: "/images/products/centrifugal-mono-block-3-phase.jpeg",
+        description:
+            "Three phase centrifugal monoblock pump designed for dependable water pumping applications.",
+        link: "/products/centrifugal-monoblock-pumps",
+    },
+
+
+    /* =========================================================
+       DEWATERING / SEWAGE
+    ========================================================= */
+
+    {
+        id: 24,
+        name: "Dewatering Sewage Pump",
+        category: "Dewatering & Sewage",
+        image: "/images/products/dewatering-sewage.jpeg",
+        description:
+            "Dewatering and sewage pumping solution designed for reliable water removal applications.",
+        link: "/products",
+    },
+
+    {
+        id: 25,
+        name: "Dewatering Cutter Sewage Pump",
+        category: "Dewatering & Sewage",
+        image: "/images/products/dewatering-cutter-sewage.jpeg",
+        description:
+            "Cutter sewage pumping solution designed for demanding dewatering and wastewater applications.",
+        link: "/products",
+    },
+
+
+    /* =========================================================
+       MOTOR
+    ========================================================= */
+
+    {
+        id: 26,
+        name: "V5 Motor",
+        category: "Motors",
+        image: "/images/products/v5-motor.jpeg",
+        description:
+            "Reliable motor solution designed for dependable power delivery in pumping applications.",
+        link: "/products/motors",
     },
 ];
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
 
 const categories = [
     "All Products",
     "Submersible Pumps",
     "Openwell Pumps",
     "Monoblock Pumps",
-    "Pipes & Accessories",
+    "Dewatering & Sewage",
+    "Motors",
 ];
 
+
+/* =========================================================
+   PAGE
+========================================================= */
+
 export default function ProductsPage() {
+
     const [search, setSearch] = useState("");
-    const [activeCategory, setActiveCategory] = useState("All Products");
-    const [mobileFilters, setMobileFilters] = useState(false);
+    const [activeCategory, setActiveCategory] =
+        useState("All Products");
+
+    const [mobileFilters, setMobileFilters] =
+        useState(false);
+
+
+    /* =========================================================
+       FILTER
+    ========================================================= */
 
     const filteredProducts = useMemo(() => {
+
         return products.filter((product) => {
+
             const matchesCategory =
                 activeCategory === "All Products" ||
                 product.category === activeCategory;
 
-            const searchText = search.toLowerCase().trim();
+
+            const searchText =
+                search.toLowerCase().trim();
+
 
             const matchesSearch =
                 !searchText ||
-                product.name.toLowerCase().includes(searchText) ||
-                product.description.toLowerCase().includes(searchText) ||
-                product.category.toLowerCase().includes(searchText);
+                product.name
+                    .toLowerCase()
+                    .includes(searchText) ||
+                product.description
+                    .toLowerCase()
+                    .includes(searchText) ||
+                product.category
+                    .toLowerCase()
+                    .includes(searchText);
+
 
             return matchesCategory && matchesSearch;
+
         });
+
     }, [search, activeCategory]);
+
 
     return (
         <main className="bg-white">
+
 
             {/* =====================================================
                 HERO
@@ -132,18 +379,19 @@ export default function ProductsPage() {
                         alt="KMP Industries products"
                         fill
                         priority
-                        className="object-cover"
                         sizes="100vw"
+                        className="object-cover"
                     />
 
-                    {/* Dark Overlay */}
+
+                    {/* Overlay */}
 
                     <div className="absolute inset-0 bg-black/55" />
 
                     <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-black/10" />
 
 
-                    {/* Hero Content */}
+                    {/* Content */}
 
                     <div className="relative z-10 flex min-h-[500px] items-end px-6 pb-12 sm:min-h-[560px] sm:px-10 sm:pb-16 lg:min-h-[600px] lg:px-16 lg:pb-20">
 
@@ -162,8 +410,6 @@ export default function ProductsPage() {
                             className="max-w-5xl"
                         >
 
-                            {/* Label */}
-
                             <div className="mb-6 flex items-center gap-3">
 
                                 <span className="h-2 w-2 rounded-full bg-red-500" />
@@ -174,8 +420,6 @@ export default function ProductsPage() {
 
                             </div>
 
-
-                            {/* Heading */}
 
                             <h1 className="max-w-5xl text-4xl font-semibold leading-[1.02] tracking-[-2px] text-white sm:text-5xl md:text-6xl lg:text-[76px]">
 
@@ -190,14 +434,12 @@ export default function ProductsPage() {
                             </h1>
 
 
-                            {/* Description */}
-
                             <p className="mt-6 max-w-3xl text-sm leading-7 text-white/70 sm:text-base">
 
                                 Explore KMP Industries' range of dependable
-                                pumping solutions, motors, pipes and accessories
-                                engineered for agricultural, residential and
-                                industrial applications.
+                                pumping solutions, motors and water management
+                                products engineered for agricultural,
+                                residential and industrial applications.
 
                             </p>
 
@@ -217,6 +459,7 @@ export default function ProductsPage() {
             <section className="px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
 
                 <div className="mx-auto max-w-[1380px]">
+
 
                     {/* =================================================
                         HEADING
@@ -252,8 +495,9 @@ export default function ProductsPage() {
 
                             <p className="max-w-xl text-sm leading-7 text-gray-500">
 
-                                Find the right KMP solution for your pumping,
-                                water management and installation requirements.
+                                Explore our range of pumping and motor
+                                solutions for different water management
+                                requirements.
 
                             </p>
 
@@ -263,7 +507,7 @@ export default function ProductsPage() {
 
 
                     {/* =================================================
-                        MOBILE FILTER BUTTON
+                        MOBILE FILTER
                     ================================================= */}
 
                     <button
@@ -284,7 +528,7 @@ export default function ProductsPage() {
 
 
                     {/* =================================================
-                        MAIN PRODUCT GRID
+                        MAIN GRID
                     ================================================= */}
 
                     <div className="grid gap-12 lg:grid-cols-[250px_1fr]">
@@ -297,6 +541,7 @@ export default function ProductsPage() {
                         <aside className="hidden lg:block">
 
                             <div className="sticky top-28">
+
 
                                 {/* Search */}
 
@@ -366,7 +611,7 @@ export default function ProductsPage() {
                                 </div>
 
 
-                                {/* Product Count */}
+                                {/* Count */}
 
                                 <div className="mt-10 border-t border-gray-200 pt-6">
 
@@ -390,10 +635,11 @@ export default function ProductsPage() {
 
 
                         {/* =================================================
-                            PRODUCTS
+                            PRODUCT LIST
                         ================================================= */}
 
                         <div>
+
 
                             {/* Mobile Search */}
 
@@ -420,7 +666,7 @@ export default function ProductsPage() {
                             </div>
 
 
-                            {/* Product Results */}
+                            {/* Products */}
 
                             {filteredProducts.length > 0 ? (
 
@@ -444,7 +690,7 @@ export default function ProductsPage() {
                                                 }}
                                                 transition={{
                                                     duration: 0.5,
-                                                    delay: index * 0.05,
+                                                    delay: index * 0.04,
                                                 }}
                                                 className="group"
                                             >
@@ -459,6 +705,7 @@ export default function ProductsPage() {
                                                             src={product.image}
                                                             alt={product.name}
                                                             fill
+                                                            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                                             className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
                                                         />
 
@@ -523,8 +770,6 @@ export default function ProductsPage() {
 
                             ) : (
 
-                                /* No Products */
-
                                 <div className="rounded-[24px] border border-gray-200 px-6 py-20 text-center">
 
                                     <p className="text-lg font-bold text-[#151515]">
@@ -579,7 +824,7 @@ export default function ProductsPage() {
                         className="absolute right-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white p-6 shadow-2xl"
                     >
 
-                        {/* Drawer Header */}
+                        {/* Header */}
 
                         <div className="flex items-center justify-between">
 
@@ -622,8 +867,11 @@ export default function ProductsPage() {
                                         key={category}
                                         type="button"
                                         onClick={() => {
+
                                             setActiveCategory(category);
+
                                             setMobileFilters(false);
+
                                         }}
                                         className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm ${activeCategory === category
                                             ? "bg-red-50 font-bold text-red-600"
