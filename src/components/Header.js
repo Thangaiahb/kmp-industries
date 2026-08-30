@@ -22,8 +22,8 @@ const navLinks = [
         href: "/products",
     },
     {
-        name: "Applications",
-        href: "/applications",
+        name: "Solar",
+        href: "/solar",
     },
     {
         name: "Quality",
