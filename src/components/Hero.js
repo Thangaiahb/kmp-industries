@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -9,7 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const slides = [
     {
-        video: "/videos/hero/one.mp4",
+        image: "/images/hero/indexhero1.png",
         tag: "KMP INDUSTRIES · COIMBATORE",
         title: "Energy-Efficient",
         highlight: "Submersible Pumps",
@@ -20,7 +21,7 @@ const slides = [
         secondary: "Get a Quote",
     },
     {
-        video: "/videos/hero/two.mp4",
+        image: "/images/applications/Agricultural (2).png",
         tag: "ENGINEERED FOR PERFORMANCE",
         title: "Powering Water.",
         highlight: "Built for Reliability.",
@@ -31,7 +32,7 @@ const slides = [
         secondary: "Talk to Our Team",
     },
     {
-        video: "/videos/hero/three.mp4",
+        image: "/images/applications/Residential (2).png",
         tag: "QUALITY · ENGINEERING · TRUST",
         title: "Reliable Solutions",
         highlight: "For Every Water Need.",
@@ -46,113 +47,54 @@ const slides = [
 export default function Hero() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [progress, setProgress] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const [videoReady, setVideoReady] = useState(false);
-
-    const videoRef = useRef(null);
 
     const slide = slides[currentSlide];
 
-    /* =====================================================
-       CHANGE SLIDE
-    ===================================================== */
-
     const changeSlide = (index) => {
         setProgress(0);
-        setDuration(0);
-        setVideoReady(false);
         setCurrentSlide(index);
     };
 
-
-    /* =====================================================
-       VIDEO LOADED
-    ===================================================== */
-
-    const handleLoadedMetadata = () => {
-        const video = videoRef.current;
-
-        if (!video) return;
-
-        if (Number.isFinite(video.duration)) {
-            setDuration(video.duration);
-        }
-
-        setVideoReady(true);
-
-        video.play().catch(() => { });
-    };
-
-
-    /* =====================================================
-       VIDEO PROGRESS
-    ===================================================== */
-
-    const handleTimeUpdate = () => {
-        const video = videoRef.current;
-
-        if (!video) return;
-
-        if (
-            !video.duration ||
-            !Number.isFinite(video.duration)
-        ) {
-            return;
-        }
-
-        const percentage =
-            (video.currentTime / video.duration) * 100;
-
-        setProgress(percentage);
-    };
-
-
-    /* =====================================================
-       VIDEO END
-    ===================================================== */
-
-    const handleVideoEnded = () => {
-        const next =
-            (currentSlide + 1) % slides.length;
-
-        changeSlide(next);
-    };
-
-
-    /* =====================================================
-       RESET VIDEO
-    ===================================================== */
-
     useEffect(() => {
         setProgress(0);
-        setDuration(0);
-        setVideoReady(false);
 
-        const video = videoRef.current;
+        const duration = 6000;
+        const intervalTime = 60;
+        const step = 100 / (duration / intervalTime);
 
-        if (!video) return;
+        const progressInterval = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 100) {
+                    return 100;
+                }
 
-        video.currentTime = 0;
+                return prev + step;
+            });
+        }, intervalTime);
 
-        video.play().catch(() => { });
+        const slideTimeout = setTimeout(() => {
+            setCurrentSlide((prev) => (prev + 1) % slides.length);
+        }, duration);
+
+        return () => {
+            clearInterval(progressInterval);
+            clearTimeout(slideTimeout);
+        };
     }, [currentSlide]);
 
-
     return (
-        <section className="relative min-h-[720px] h-screen w-full overflow-hidden bg-black">
+        <section className="relative h-screen min-h-[720px] w-full overflow-hidden bg-black">
 
             {/* =================================================
-                VIDEO BACKGROUND
+                IMAGE BACKGROUND
             ================================================= */}
-
             <AnimatePresence mode="wait">
-
                 <motion.div
-                    key={slide.video}
+                    key={slide.image}
                     className="absolute inset-0 z-0"
                     initial={{
                         opacity: 0,
-                        scale: 1.05,
+                        scale: 1.06,
                     }}
                     animate={{
                         opacity: 1,
@@ -167,50 +109,38 @@ export default function Hero() {
                             duration: 0.9,
                         },
                         scale: {
-                            duration: 1.4,
+                            duration: 6,
                             ease: "easeOut",
                         },
                     }}
                 >
-
-                    <video
-                        ref={videoRef}
-                        key={slide.video}
-                        src={slide.video}
-                        autoPlay
-                        muted
-                        playsInline
-                        preload="auto"
-                        onLoadedMetadata={handleLoadedMetadata}
-                        onTimeUpdate={handleTimeUpdate}
-                        onEnded={handleVideoEnded}
-                        className="h-full w-full object-cover"
+                    <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        fill
+                        priority={currentSlide === 0}
+                        loading={currentSlide === 0 ? "eager" : "lazy"}
+                        sizes="100vw"
+                        className="object-cover"
                     />
-
                 </motion.div>
-
             </AnimatePresence>
-
 
             {/* =================================================
                 DARK OVERLAY
             ================================================= */}
-
             <div className="absolute inset-0 z-10 bg-black/30" />
 
-            <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
 
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-transparent to-black/30" />
-
 
             {/* =================================================
                 HERO CONTENT
             ================================================= */}
-
             <div className="relative z-20 flex h-full items-center justify-center px-5 pt-24 sm:px-8 lg:px-10">
 
                 <AnimatePresence mode="wait">
-
                     <motion.div
                         key={currentSlide}
                         initial={{
@@ -232,10 +162,7 @@ export default function Hero() {
                         className="mx-auto w-full max-w-6xl text-center"
                     >
 
-                        {/* =================================================
-                            TAG
-                        ================================================= */}
-
+                        {/* TAG */}
                         <motion.div
                             initial={{
                                 opacity: 0,
@@ -251,20 +178,14 @@ export default function Hero() {
                             }}
                             className="mx-auto mb-7 inline-flex items-center rounded-full border border-white/25 bg-white/10 px-5 py-2 backdrop-blur-md"
                         >
-
                             <span className="mr-2 h-2 w-2 rounded-full bg-red-500" />
 
                             <span className="text-[10px] font-bold uppercase tracking-[2px] text-white sm:text-xs">
                                 {slide.tag}
                             </span>
-
                         </motion.div>
 
-
-                        {/* =================================================
-                            HEADING
-                        ================================================= */}
-
+                        {/* HEADING */}
                         <motion.h1
                             initial={{
                                 opacity: 0,
@@ -280,7 +201,6 @@ export default function Hero() {
                             }}
                             className="mx-auto max-w-6xl text-[44px] font-extrabold leading-[0.98] tracking-[-2px] text-white sm:text-6xl md:text-7xl lg:text-[82px] xl:text-[92px]"
                         >
-
                             {slide.title}
 
                             <br />
@@ -298,14 +218,9 @@ export default function Hero() {
                                     </span>
                                 </>
                             )}
-
                         </motion.h1>
 
-
-                        {/* =================================================
-                            DESCRIPTION
-                        ================================================= */}
-
+                        {/* DESCRIPTION */}
                         <motion.p
                             initial={{
                                 opacity: 0,
@@ -324,11 +239,7 @@ export default function Hero() {
                             {slide.description}
                         </motion.p>
 
-
-                        {/* =================================================
-                            BUTTONS
-                        ================================================= */}
-
+                        {/* BUTTONS */}
                         <motion.div
                             initial={{
                                 opacity: 0,
@@ -345,13 +256,10 @@ export default function Hero() {
                             className="mt-9 flex flex-wrap items-center justify-center gap-4"
                         >
 
-                            {/* PRIMARY */}
-
                             <Link
                                 href="/products"
                                 className="group flex items-center gap-3 rounded-full bg-red-600 py-2 pl-7 pr-2 text-sm font-bold text-white shadow-xl shadow-red-600/30 transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:text-base"
                             >
-
                                 <span>
                                     {slide.primary}
                                 </span>
@@ -361,11 +269,7 @@ export default function Hero() {
                                         sx={{ fontSize: 19 }}
                                     />
                                 </span>
-
                             </Link>
-
-
-                            {/* SECONDARY */}
 
                             <Link
                                 href="/contact"
@@ -377,27 +281,16 @@ export default function Hero() {
                         </motion.div>
 
                     </motion.div>
-
                 </AnimatePresence>
 
             </div>
 
-
             {/* =================================================
-    SLIDE CONTROLS
-================================================= */}
-
+                SLIDE PROGRESS
+            ================================================= */}
             <div className="absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-5">
 
-                {/* NUMBERS */}
-
-
-
-
-                {/* PROGRESS */}
-
                 <div className="h-[2px] w-32 overflow-hidden rounded-full bg-white/25 sm:w-48">
-
                     <motion.div
                         className="h-full bg-red-500"
                         animate={{
@@ -408,16 +301,28 @@ export default function Hero() {
                             ease: "linear",
                         }}
                     />
+                </div>
 
+                {/* Optional clickable dots */}
+                <div className="flex items-center gap-2">
+                    {slides.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => changeSlide(index)}
+                            aria-label={`Go to slide ${index + 1}`}
+                            className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index
+                                ? "w-7 bg-red-500"
+                                : "w-2 bg-white/40 hover:bg-white/70"
+                                }`}
+                        />
+                    ))}
                 </div>
 
             </div>
 
-
             {/* =================================================
                 SCROLL INDICATOR
             ================================================= */}
-
             <motion.div
                 animate={{
                     y: [0, 8, 0],
@@ -429,7 +334,6 @@ export default function Hero() {
                 }}
                 className="absolute bottom-9 left-6 z-30 hidden items-center gap-3 text-[10px] font-bold uppercase tracking-[3px] text-white/60 md:flex lg:left-10"
             >
-
                 <span>
                     Scroll
                 </span>
@@ -439,14 +343,11 @@ export default function Hero() {
                 <KeyboardArrowDownIcon
                     sx={{ fontSize: 16 }}
                 />
-
             </motion.div>
-
 
             {/* =================================================
                 RED ACCENT
             ================================================= */}
-
             <div className="absolute bottom-0 left-0 z-30 h-1 w-full bg-gradient-to-r from-red-600 via-red-500 to-transparent" />
 
         </section>

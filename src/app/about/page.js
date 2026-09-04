@@ -11,9 +11,9 @@ export default function AboutPage() {
 
             <AboutHero />
             <VisionMissionSection />
-
-            <JourneySection />
             <LeadershipSection />
+            <JourneySection />
+
             <AboutStatsSection />
             <AboutContactCTA />
         </main>

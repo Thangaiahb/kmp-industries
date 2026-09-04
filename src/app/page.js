@@ -7,6 +7,7 @@ import ApplicationsSection from "../components/ApplicationsSection";
 import QualitySection from "../components/QualitySection";
 import ContactCTA from "../components/ContactCTA";
 import VideoSection from "../components/VideoSection";
+
 export default function Home() {
   return (
     <main>
@@ -24,6 +25,7 @@ export default function Home() {
 
       <QualitySection />
       <VideoSection />
+
       <ContactCTA />
     </main>
   );

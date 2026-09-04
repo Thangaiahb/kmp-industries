@@ -15,7 +15,7 @@ const applications = [
         subtitle: "IRRIGATION & BOREWELL PUMPING",
         description:
             "Reliable pumping solutions for agricultural irrigation, deep borewell pumping and efficient water distribution.",
-        image: "/images/applications/Agricultural.png",
+        image: "/images/applications/Agricultural (2).png",
         icon: AgricultureIcon,
     },
     {
@@ -24,7 +24,7 @@ const applications = [
         subtitle: "DOMESTIC & HIGH-RISE WATER SUPPLY",
         description:
             "Efficient water supply solutions for homes, apartments and high-rise residential buildings.",
-        image: "/images/applications/Residential.png",
+        image: "/images/applications/Residential (2).png",
         icon: HomeWorkIcon,
     },
     {
@@ -33,7 +33,7 @@ const applications = [
         subtitle: "COMMERCIAL & PRESSURE BOOSTING",
         description:
             "Dependable pumping systems for industrial processes, commercial buildings and pressure boosting applications.",
-        image: "/images/applications/Industrial.png",
+        image: "/images/applications/Industrial (2).png",
         icon: FactoryIcon,
     },
 ];

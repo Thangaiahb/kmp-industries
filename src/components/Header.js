@@ -26,12 +26,12 @@ const navLinks = [
         href: "/solar",
     },
     {
-        name: "Quality",
-        href: "/quality",
-    },
-    {
         name: "Contact",
         href: "/contact",
+    },
+    {
+        name: "Blogs",
+        href: "/blogs",
     },
 ];
 

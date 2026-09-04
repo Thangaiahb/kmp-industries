@@ -695,25 +695,24 @@ export default function ProductsPage() {
                                                 className="group"
                                             >
 
-                                                {/* Image */}
 
+
+                                                {/* Image */}
                                                 <div className="relative overflow-hidden rounded-[24px] bg-[#f5f5f5]">
 
-                                                    <div className="relative aspect-[4/3]">
+                                                    <div className="relative aspect-[4/5]">
 
                                                         <Image
                                                             src={product.image}
                                                             alt={product.name}
                                                             fill
                                                             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                            className="object-contain p-8 transition-transform duration-700 group-hover:scale-105"
+                                                            className="object-contain scale-[1.15] transition-transform duration-700 group-hover:scale-[1.22]"
                                                         />
 
                                                     </div>
 
-
                                                     {/* Category */}
-
                                                     <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[1px] text-gray-500 backdrop-blur">
                                                         {product.category}
                                                     </span>

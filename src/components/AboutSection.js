@@ -120,10 +120,10 @@ export default function AboutSection() {
                         <div className="group relative h-[470px] overflow-hidden rounded-[30px] sm:h-[560px]">
 
                             <Image
-                                src="/images/hero/indexhero.png"
+                                src="/images/hero/indexhero1.png"
                                 alt="KMP Industries pumping solutions"
                                 fill
-                                sizes="(max-width: 1024px) 100vw, 50vw"
+                                sizes="(max-width: 1024px) 100vw, 50vw" loading="eager"
                                 className="object-cover transition duration-700 group-hover:scale-105"
                             />
 

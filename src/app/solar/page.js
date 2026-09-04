@@ -1,5 +1,9 @@
 "use client";
 
+
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 export default function SolarPage() {
     const applications = [
         {
@@ -143,20 +147,27 @@ export default function SolarPage() {
                         agriculture, irrigation and reliable water management.
                     </p>
 
+
                     {/* BUTTONS */}
                     <div className="mt-9 flex flex-wrap justify-center gap-4">
 
+                        {/* PRIMARY */}
                         <a
                             href="/products"
-                            className="group inline-flex items-center gap-3 rounded-full bg-red-600 px-7 py-4 font-bold text-white shadow-xl shadow-red-600/20 transition hover:bg-red-700 hover:scale-[1.02]"
+                            className="group flex items-center gap-3 rounded-full bg-red-600 py-2 pl-7 pr-2 text-sm font-bold text-white shadow-xl shadow-red-600/30 transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:text-base"
                         >
-                            Explore Products
+                            <span>
+                                Explore Products
+                            </span>
 
-                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-red-600 transition group-hover:translate-x-1">
-                                →
+                            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-red-600 transition-transform duration-300 group-hover:rotate-45">
+                                <ArrowOutwardIcon
+                                    sx={{ fontSize: 19 }}
+                                />
                             </span>
                         </a>
 
+                        {/* SECONDARY */}
                         <a
                             href="/contact"
                             className="rounded-full border border-white/30 bg-white/10 px-8 py-4 font-bold text-white backdrop-blur-md transition hover:bg-white hover:text-black"
@@ -812,115 +823,152 @@ export default function SolarPage() {
             </section>
 
 
+
+
+
             {/* =========================================================
-                SERIES / PARALLEL
-            ========================================================= */}
-            <section className="bg-[#f5f5f3] px-6 py-24 sm:px-10 lg:py-32">
+    FINAL CTA
+========================================================= */}
+            <section className="relative overflow-hidden bg-white px-5 py-20 sm:px-8 md:py-28 lg:px-10">
 
-                <div className="mx-auto max-w-7xl">
+                <div className="mx-auto max-w-[1380px]">
 
-                    <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+                    {/* =================================================
+            MAIN CTA
+        ================================================= */}
 
-                        <div>
+                    <div className="relative overflow-hidden rounded-[32px] bg-[#111111] px-7 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
 
-                            <p className="text-xs font-bold uppercase tracking-[2px] text-red-600">
-                                Solar Module Configuration
-                            </p>
+                        {/* Background decoration */}
 
-                            <h2 className="mt-5 text-4xl font-black leading-[1.05] sm:text-5xl">
-                                Series &
-                                <br />
-                                <span className="text-red-600">
-                                    Parallel Connection.
+                        <div className="pointer-events-none absolute -right-32 -top-32 h-[400px] w-[400px] rounded-full bg-red-600/20 blur-3xl" />
+
+                        <div className="pointer-events-none absolute -bottom-40 left-1/3 h-[350px] w-[350px] rounded-full bg-red-600/10 blur-3xl" />
+
+
+                        {/* Large background text */}
+
+                        <span className="pointer-events-none absolute -bottom-12 right-5 select-none text-[100px] font-black leading-none tracking-[-8px] text-white/[0.025] sm:text-[150px] lg:text-[200px]">
+                            SOLAR
+                        </span>
+
+
+                        <div className="relative z-10">
+
+                            {/* Label */}
+
+                            <div className="flex items-center gap-3">
+
+                                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-white">
+                                    <span className="text-sm">
+                                        ✦
+                                    </span>
                                 </span>
+
+                                <span className="text-xs font-bold uppercase tracking-[2px] text-white/50">
+                                    KMP Energy · Solar Solutions
+                                </span>
+
+                            </div>
+
+
+                            {/* Heading */}
+
+                            <h2 className="mt-7 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-2px] text-white sm:text-5xl md:text-6xl lg:text-[72px]">
+
+                                Power Your Water
+                                <br />
+
+                                <span className="text-red-500">
+                                    With Solar Energy.
+                                </span>
+
                             </h2>
 
-                            <p className="mt-6 text-base leading-8 text-gray-500">
-                                Solar module arrays can be configured in
-                                series and parallel combinations depending
-                                on the pumping system and required solar
-                                input.
+
+                            {/* Description */}
+
+                            <p className="mt-6 max-w-2xl text-sm leading-7 text-white/50 sm:text-base">
+                                Talk to KMP Industries about your solar pumping,
+                                irrigation and water-management requirements.
                             </p>
 
-                        </div>
+
+                            {/* Buttons */}
+
+                            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+
+                                {/* Get a Quote */}
+
+                                <a
+                                    href="/contact"
+                                    className="group inline-flex items-center justify-center gap-4 rounded-full bg-red-600 py-2 pl-7 pr-2 text-sm font-bold text-white transition-all duration-300 hover:bg-red-500 hover:shadow-xl hover:shadow-red-600/20"
+                                >
+
+                                    <span>
+                                        Get a Quote
+                                    </span>
+
+                                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-red-600 transition-transform duration-300 group-hover:rotate-45">
+
+                                        <ArrowOutwardIcon
+                                            sx={{
+                                                fontSize: 19,
+                                            }}
+                                        />
+
+                                    </span>
+
+                                </a>
 
 
-                        {/* DIAGRAM */}
-                        <div className="rounded-[30px] bg-black p-8 sm:p-12">
+                                {/* Explore Products */}
 
-                            <div className="grid gap-8 sm:grid-cols-2">
+                                <a
+                                    href="/products"
+                                    className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 text-sm font-bold text-white transition-all duration-300 hover:border-white/30 hover:bg-white/10"
+                                >
+                                    Explore Products
+                                </a>
 
-                                {/* SERIES */}
-                                <div>
+                            </div>
 
-                                    <p className="text-xs font-bold uppercase tracking-[2px] text-red-500">
-                                        Series
-                                    </p>
 
-                                    <h3 className="mt-3 text-2xl font-bold text-white">
-                                        Panels In Series
-                                    </h3>
+                            {/* =================================================
+                    SOLAR PRODUCT STRIP
+                ================================================= */}
 
-                                    <div className="mt-8 grid grid-cols-3 gap-2">
+                            <div className="mt-14 grid border-t border-white/10 pt-7 sm:grid-cols-2 lg:grid-cols-4">
 
-                                        {[1, 2, 3, 4, 5, 6].map((panel) => (
-                                            <div
-                                                key={panel}
-                                                className="flex h-12 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-xs font-bold text-white"
-                                            >
-                                                PV
-                                            </div>
-                                        ))}
+                                {[
+                                    "Solar Submersible Pumps",
+                                    "Solar Monoblock Pumps",
+                                    "Solar Openwell Pumps",
+                                    "Solar Controllers",
+                                ].map((product, index) => (
+
+                                    <div
+                                        key={product}
+                                        className={`py-3 ${index !== 3
+                                            ? "border-b border-white/10 lg:border-b-0 lg:border-r"
+                                            : ""
+                                            } lg:px-6 ${index === 0
+                                                ? "lg:pl-0"
+                                                : ""
+                                            }`}
+                                    >
+
+                                        <p className="text-xs font-bold uppercase tracking-[1px] text-white/70">
+                                            {product}
+                                        </p>
+
+                                        <p className="mt-1 text-xs text-white/30">
+                                            KMP Energy
+                                        </p>
 
                                     </div>
 
-                                    <p className="mt-5 text-sm leading-6 text-white/40">
-                                        Series connection increases the
-                                        available voltage of the solar array.
-                                    </p>
-
-                                </div>
-
-
-                                {/* PARALLEL */}
-                                <div>
-
-                                    <p className="text-xs font-bold uppercase tracking-[2px] text-red-500">
-                                        Parallel
-                                    </p>
-
-                                    <h3 className="mt-3 text-2xl font-bold text-white">
-                                        Multiple Strings
-                                    </h3>
-
-                                    <div className="mt-8 space-y-3">
-
-                                        {[1, 2, 3].map((row) => (
-                                            <div
-                                                key={row}
-                                                className="flex items-center gap-2"
-                                            >
-                                                {[1, 2, 3].map((panel) => (
-                                                    <div
-                                                        key={panel}
-                                                        className="h-10 flex-1 rounded-lg border border-white/20 bg-white/5"
-                                                    />
-                                                ))}
-
-                                                <span className="text-white/30">
-                                                    →
-                                                </span>
-                                            </div>
-                                        ))}
-
-                                    </div>
-
-                                    <p className="mt-5 text-sm leading-6 text-white/40">
-                                        Parallel strings increase the
-                                        available current capacity.
-                                    </p>
-
-                                </div>
+                                ))}
 
                             </div>
 
@@ -928,56 +976,98 @@ export default function SolarPage() {
 
                     </div>
 
-                </div>
 
-            </section>
+                    {/* =================================================
+            CONTACT INFO
+        ================================================= */}
+
+                    <div className="mt-8 grid gap-4 sm:grid-cols-2">
+
+                        {/* Phone */}
+
+                        <a
+                            href="tel:+919000000000"
+                            className="group flex items-center gap-5 rounded-[22px] border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-red-200 hover:shadow-lg"
+                        >
+
+                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-50 text-red-600 transition-all duration-300 group-hover:bg-red-600 group-hover:text-white">
+
+                                <PhoneInTalkIcon
+                                    sx={{
+                                        fontSize: 21,
+                                    }}
+                                />
+
+                            </div>
+
+                            <div>
+
+                                <p className="text-[10px] font-bold uppercase tracking-[2px] text-gray-400">
+                                    Talk to us
+                                </p>
+
+                                <p className="mt-1 text-sm font-bold text-[#151515]">
+                                    +91 90000 00000
+                                </p>
+
+                            </div>
+
+                        </a>
 
 
-            {/* =========================================================
-                FINAL CTA
-            ========================================================= */}
-            <section className="px-6 py-24 sm:px-10 lg:py-32">
+                        {/* Email */}
 
-                <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[40px] bg-red-600 px-8 py-20 text-center text-white sm:px-16">
+                        <a
+                            href="mailto:info@kmpindustries.com"
+                            className="group flex items-center gap-5 rounded-[22px] border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-red-200 hover:shadow-lg"
+                        >
 
-                    <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full border border-white/10" />
+                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-50 text-red-600 transition-all duration-300 group-hover:bg-red-600 group-hover:text-white">
 
-                    <div className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full border border-white/10" />
+                                <EmailOutlinedIcon
+                                    sx={{
+                                        fontSize: 21,
+                                    }}
+                                />
 
-                    <div className="relative z-10">
+                            </div>
 
-                        <p className="text-xs font-bold uppercase tracking-[3px] text-white/60">
-                            KMP Energy
-                        </p>
+                            <div>
 
-                        <h2 className="mt-5 text-4xl font-black leading-[1.05] sm:text-5xl lg:text-6xl">
-                            Power Your Water
-                            <br />
-                            With Solar Energy.
-                        </h2>
+                                <p className="text-[10px] font-bold uppercase tracking-[2px] text-gray-400">
+                                    Email us
+                                </p>
 
-                        <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/75">
-                            Talk to KMP Industries about your solar pumping,
-                            irrigation and water-management requirements.
-                        </p>
+                                <p className="mt-1 text-sm font-bold text-[#151515]">
+                                    info@kmpindustries.com
+                                </p>
 
-                        <div className="mt-9 flex flex-wrap justify-center gap-4">
+                            </div>
 
-                            <a
-                                href="/contact"
-                                className="rounded-full bg-white px-8 py-4 font-bold text-red-600 transition hover:scale-105"
-                            >
-                                Get a Quote
-                            </a>
+                        </a>
 
-                            <a
-                                href="/products"
-                                className="rounded-full border border-white/30 bg-white/10 px-8 py-4 font-bold text-white transition hover:bg-white hover:text-red-600"
-                            >
-                                View Products
-                            </a>
+                    </div>
+
+
+                    {/* =================================================
+            BOTTOM BRAND LINE
+        ================================================= */}
+
+                    <div className="mt-8 flex items-center justify-between">
+
+                        <div className="flex items-center gap-3">
+
+                            <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
+
+                            <span className="text-[10px] font-bold uppercase tracking-[2px] text-gray-400">
+                                KMP Energy · Solar Solutions
+                            </span>
 
                         </div>
+
+                        <span className="hidden text-[10px] font-bold uppercase tracking-[2px] text-gray-400 sm:block">
+                            Coimbatore · Tamil Nadu · India
+                        </span>
 
                     </div>
 

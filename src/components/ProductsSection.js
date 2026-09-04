@@ -17,7 +17,7 @@ const products = [
     {
         number: "01",
         title: "Submersible Pumps",
-        image: "/images/products/submersible-pumps.png",
+        image: "/images/products/submersible-pumps (2).png",
         description:
             "High-efficiency borewell and openwell submersible pumps designed for agriculture, residential and industrial applications.",
         tags: ["Borewell", "Openwell", "Energy Efficient"],
@@ -25,7 +25,7 @@ const products = [
     {
         number: "02",
         title: "Monoblock Pumps",
-        image: "/images/products/monoblock-pumps.png",
+        image: "/images/products/monoblock-pumps (2).png",
         description:
             "Centrifugal and self-priming monoblock pumps engineered for consistent performance and long service life.",
         tags: ["Self Priming", "Centrifugal", "Reliable"],
@@ -33,7 +33,7 @@ const products = [
     {
         number: "03",
         title: "Motors",
-        image: "/images/products/motors.png",
+        image: "/images/products/motors (2).png",
         description:
             "Precision-engineered motors designed for dependable operation and efficient power delivery.",
         tags: ["Efficient", "Heavy Duty", "Long Life"],
@@ -41,7 +41,7 @@ const products = [
     {
         number: "04",
         title: "Solar Motor & Panels",
-        image: "/images/products/solar-motor-panels.png",
+        image: "/images/products/solar-motor-panels (2).png",
         description:
             "Solar-powered pumping solutions that combine sustainable energy with reliable water management.",
         tags: ["Solar", "Eco Friendly", "High Efficiency"],
@@ -49,7 +49,7 @@ const products = [
     {
         number: "05",
         title: "uPVC Column Pipes",
-        image: "/images/products/upvc-column-pipes.png",
+        image: "/images/products/upvc-column-pipes (2).png",
         description:
             "Heavy-duty corrosion-resistant column pipes built for durable underground water pumping systems.",
         tags: ["Corrosion Resistant", "Strong", "Long Life"],
