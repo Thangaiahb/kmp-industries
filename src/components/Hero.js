@@ -51,24 +51,33 @@ export default function Hero() {
 
     /* =========================================================
        PRELOAD ALL HERO IMAGES
-       ========================================================= */
+    ========================================================= */
     useEffect(() => {
+        const images = [];
+
         slides.forEach((item) => {
             const img = new window.Image();
             img.src = item.image;
+            images.push(img);
         });
+
+        return () => {
+            images.forEach((img) => {
+                img.src = "";
+            });
+        };
     }, []);
 
     /* =========================================================
        NEXT SLIDE
-       ========================================================= */
+    ========================================================= */
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
     };
 
     /* =========================================================
        PREVIOUS SLIDE
-       ========================================================= */
+    ========================================================= */
     const prevSlide = () => {
         setCurrentSlide(
             (prev) => (prev - 1 + slides.length) % slides.length
@@ -76,12 +85,12 @@ export default function Hero() {
     };
 
     /* =========================================================
-       AUTO SLIDE
-       ========================================================= */
+       AUTO SLIDE — EVERY 7 SECONDS
+    ========================================================= */
     useEffect(() => {
         const slideTimeout = setTimeout(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 6000);
+        }, 7000);
 
         return () => {
             clearTimeout(slideTimeout);
@@ -112,11 +121,11 @@ export default function Hero() {
                     }}
                     transition={{
                         opacity: {
-                            duration: 0.7,
+
                             ease: "easeInOut",
                         },
                         scale: {
-                            duration: 6,
+
                             ease: "easeOut",
                         },
                     }}
@@ -126,7 +135,6 @@ export default function Hero() {
                         alt={slide.title}
                         fill
                         priority={currentSlide === 0}
-                        loading="eager"
                         sizes="100vw"
                         className="object-cover"
                     />
@@ -174,6 +182,8 @@ export default function Hero() {
                     sm:left-5
                     sm:h-12
                     sm:w-12
+                    md:left-6
+                    lg:left-8
                 "
             >
                 <span className="mb-1 text-3xl font-light leading-none transition-transform duration-300 group-hover:-translate-x-0.5">
@@ -213,6 +223,8 @@ export default function Hero() {
                     sm:right-5
                     sm:h-12
                     sm:w-12
+                    md:right-6
+                    lg:right-8
                 "
             >
                 <span className="mb-1 text-3xl font-light leading-none transition-transform duration-300 group-hover:translate-x-0.5">
