@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const slides = [
     {
-        image: "/images/hero/one.png",
+        image: "/images/hero/three.png",
         tag: "KMP INDUSTRIES · COIMBATORE",
         title: "Energy-Efficient",
         highlight: "Submersible Pumps",
@@ -21,7 +21,7 @@ const slides = [
         secondary: "Get a Quote",
     },
     {
-        image: "/images/hero/two.png",
+        image: "/images/hero/two (2).png",
         tag: "ENGINEERED FOR PERFORMANCE",
         title: "Powering Water.",
         highlight: "Built for Reliability.",
@@ -32,7 +32,7 @@ const slides = [
         secondary: "Talk to Our Team",
     },
     {
-        image: "/images/hero/three.png",
+        image: "/images/hero/one (2).png",
         tag: "QUALITY · ENGINEERING · TRUST",
         title: "Reliable Solutions",
         highlight: "For Every Water Need.",
@@ -46,54 +46,44 @@ const slides = [
 
 export default function Hero() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [progress, setProgress] = useState(0);
 
     const slide = slides[currentSlide];
 
     /* =========================================================
        PRELOAD ALL HERO IMAGES
-    ========================================================= */
+       ========================================================= */
     useEffect(() => {
-        slides.forEach((slide) => {
+        slides.forEach((item) => {
             const img = new window.Image();
-            img.src = slide.image;
+            img.src = item.image;
         });
     }, []);
 
     /* =========================================================
-       CHANGE SLIDE
-    ========================================================= */
-    const changeSlide = (index) => {
-        setProgress(0);
-        setCurrentSlide(index);
+       NEXT SLIDE
+       ========================================================= */
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
     };
 
     /* =========================================================
-       AUTO SLIDE + PROGRESS
-    ========================================================= */
+       PREVIOUS SLIDE
+       ========================================================= */
+    const prevSlide = () => {
+        setCurrentSlide(
+            (prev) => (prev - 1 + slides.length) % slides.length
+        );
+    };
+
+    /* =========================================================
+       AUTO SLIDE
+       ========================================================= */
     useEffect(() => {
-        setProgress(0);
-
-        const duration = 6000;
-        const intervalTime = 60;
-        const step = 100 / (duration / intervalTime);
-
-        const progressInterval = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    return 100;
-                }
-
-                return prev + step;
-            });
-        }, intervalTime);
-
         const slideTimeout = setTimeout(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, duration);
+        }, 6000);
 
         return () => {
-            clearInterval(progressInterval);
             clearTimeout(slideTimeout);
         };
     }, [currentSlide]);
@@ -109,17 +99,21 @@ export default function Hero() {
                     key={slide.image}
                     className="absolute inset-0 z-0"
                     initial={{
-
+                        opacity: 0,
+                        scale: 1.04,
                     }}
                     animate={{
-
+                        opacity: 1,
+                        scale: 1,
                     }}
                     exit={{
-
+                        opacity: 0,
+                        scale: 1.02,
                     }}
                     transition={{
                         opacity: {
-
+                            duration: 0.7,
+                            ease: "easeInOut",
                         },
                         scale: {
                             duration: 6,
@@ -131,7 +125,8 @@ export default function Hero() {
                         src={slide.image}
                         alt={slide.title}
                         fill
-                        priority
+                        priority={currentSlide === 0}
+                        loading="eager"
                         sizes="100vw"
                         className="object-cover"
                     />
@@ -148,9 +143,87 @@ export default function Hero() {
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-transparent to-black/30" />
 
             {/* =================================================
+                LEFT ARROW
+            ================================================= */}
+            <button
+                type="button"
+                onClick={prevSlide}
+                aria-label="Previous slide"
+                className="
+                    group
+                    absolute
+                    left-3
+                    top-1/2
+                    z-40
+                    flex
+                    h-10
+                    w-10
+                    -translate-y-1/2
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-white/20
+                    bg-black/30
+                    text-white
+                    backdrop-blur-md
+                    transition-all
+                    duration-300
+                    hover:border-red-500
+                    hover:bg-red-600
+                    sm:left-5
+                    sm:h-12
+                    sm:w-12
+                "
+            >
+                <span className="mb-1 text-3xl font-light leading-none transition-transform duration-300 group-hover:-translate-x-0.5">
+                    ‹
+                </span>
+            </button>
+
+            {/* =================================================
+                RIGHT ARROW
+            ================================================= */}
+            <button
+                type="button"
+                onClick={nextSlide}
+                aria-label="Next slide"
+                className="
+                    group
+                    absolute
+                    right-3
+                    top-1/2
+                    z-40
+                    flex
+                    h-10
+                    w-10
+                    -translate-y-1/2
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-white/20
+                    bg-black/30
+                    text-white
+                    backdrop-blur-md
+                    transition-all
+                    duration-300
+                    hover:border-red-500
+                    hover:bg-red-600
+                    sm:right-5
+                    sm:h-12
+                    sm:w-12
+                "
+            >
+                <span className="mb-1 text-3xl font-light leading-none transition-transform duration-300 group-hover:translate-x-0.5">
+                    ›
+                </span>
+            </button>
+
+            {/* =================================================
                 HERO CONTENT
             ================================================= */}
-            <div className="relative z-20 flex h-full items-center justify-center px-5 pt-24 sm:px-8 lg:px-10">
+            <div className="relative z-20 flex h-full items-center justify-center px-12 pt-24 sm:px-16 lg:px-20">
 
                 <AnimatePresence mode="wait">
                     <motion.div
@@ -215,7 +288,19 @@ export default function Hero() {
                                 delay: 0.25,
                                 duration: 0.7,
                             }}
-                            className="mx-auto max-w-6xl text-[44px] font-extrabold leading-[0.98] tracking-[-2px] text-white sm:text-6xl md:text-7xl lg:text-[82px] xl:text-[92px]"
+                            className="
+                                mx-auto
+                                max-w-6xl
+                                text-[44px]
+                                font-extrabold
+                                leading-[0.98]
+                                tracking-[-2px]
+                                text-white
+                                sm:text-6xl
+                                md:text-7xl
+                                lg:text-[82px]
+                                xl:text-[92px]
+                            "
                         >
                             {slide.title}
 
@@ -279,7 +364,27 @@ export default function Hero() {
                             {/* PRIMARY BUTTON */}
                             <Link
                                 href="/products"
-                                className="group flex items-center gap-3 rounded-full bg-red-600 py-2 pl-7 pr-2 text-sm font-bold text-white shadow-xl shadow-red-600/30 transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:text-base"
+                                className="
+                                    group
+                                    flex
+                                    items-center
+                                    gap-3
+                                    rounded-full
+                                    bg-red-600
+                                    py-2
+                                    pl-7
+                                    pr-2
+                                    text-sm
+                                    font-bold
+                                    text-white
+                                    shadow-xl
+                                    shadow-red-600/30
+                                    transition-all
+                                    duration-300
+                                    hover:scale-105
+                                    hover:bg-red-700
+                                    sm:text-base
+                                "
                             >
                                 <span>
                                     {slide.primary}
@@ -295,7 +400,23 @@ export default function Hero() {
                             {/* SECONDARY BUTTON */}
                             <Link
                                 href="/contact"
-                                className="rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-gray-900 sm:text-base"
+                                className="
+                                    rounded-full
+                                    border
+                                    border-white/40
+                                    bg-white/10
+                                    px-7
+                                    py-3.5
+                                    text-sm
+                                    font-semibold
+                                    text-white
+                                    backdrop-blur-md
+                                    transition-all
+                                    duration-300
+                                    hover:bg-white
+                                    hover:text-gray-900
+                                    sm:text-base
+                                "
                             >
                                 {slide.secondary}
                             </Link>
@@ -304,42 +425,6 @@ export default function Hero() {
 
                     </motion.div>
                 </AnimatePresence>
-
-            </div>
-
-            {/* =================================================
-                SLIDE PROGRESS
-            ================================================= */}
-            <div className="absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-5">
-
-                {/* PROGRESS BAR */}
-                <div className="h-[2px] w-32 overflow-hidden rounded-full bg-white/25 sm:w-48">
-                    <motion.div
-                        className="h-full bg-red-500"
-                        animate={{
-                            width: `${progress}%`,
-                        }}
-                        transition={{
-                            duration: 0.1,
-                            ease: "linear",
-                        }}
-                    />
-                </div>
-
-                {/* CLICKABLE DOTS */}
-                <div className="flex items-center gap-2">
-                    {slides.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => changeSlide(index)}
-                            aria-label={`Go to slide ${index + 1}`}
-                            className={`h-2 rounded-full transition-all duration-300 ${currentSlide === index
-                                ? "w-7 bg-red-500"
-                                : "w-2 bg-white/40 hover:bg-white/70"
-                                }`}
-                        />
-                    ))}
-                </div>
 
             </div>
 
@@ -355,7 +440,22 @@ export default function Hero() {
                     repeat: Infinity,
                     ease: "easeInOut",
                 }}
-                className="absolute bottom-9 left-6 z-30 hidden items-center gap-3 text-[10px] font-bold uppercase tracking-[3px] text-white/60 md:flex lg:left-10"
+                className="
+                    absolute
+                    bottom-9
+                    left-6
+                    z-30
+                    hidden
+                    items-center
+                    gap-3
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[3px]
+                    text-white/60
+                    md:flex
+                    lg:left-10
+                "
             >
                 <span>
                     Scroll
