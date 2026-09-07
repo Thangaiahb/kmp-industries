@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const slides = [
     {
-        image: "/images/hero/indexhero1.png",
+        image: "/images/hero/one.png",
         tag: "KMP INDUSTRIES · COIMBATORE",
         title: "Energy-Efficient",
         highlight: "Submersible Pumps",
@@ -21,7 +21,7 @@ const slides = [
         secondary: "Get a Quote",
     },
     {
-        image: "/images/applications/Agricultural (2).png",
+        image: "/images/hero/two.png",
         tag: "ENGINEERED FOR PERFORMANCE",
         title: "Powering Water.",
         highlight: "Built for Reliability.",
@@ -32,7 +32,7 @@ const slides = [
         secondary: "Talk to Our Team",
     },
     {
-        image: "/images/applications/Residential (2).png",
+        image: "/images/hero/three.png",
         tag: "QUALITY · ENGINEERING · TRUST",
         title: "Reliable Solutions",
         highlight: "For Every Water Need.",
@@ -50,11 +50,27 @@ export default function Hero() {
 
     const slide = slides[currentSlide];
 
+    /* =========================================================
+       PRELOAD ALL HERO IMAGES
+    ========================================================= */
+    useEffect(() => {
+        slides.forEach((slide) => {
+            const img = new window.Image();
+            img.src = slide.image;
+        });
+    }, []);
+
+    /* =========================================================
+       CHANGE SLIDE
+    ========================================================= */
     const changeSlide = (index) => {
         setProgress(0);
         setCurrentSlide(index);
     };
 
+    /* =========================================================
+       AUTO SLIDE + PROGRESS
+    ========================================================= */
     useEffect(() => {
         setProgress(0);
 
@@ -93,20 +109,17 @@ export default function Hero() {
                     key={slide.image}
                     className="absolute inset-0 z-0"
                     initial={{
-                        opacity: 0,
-                        scale: 1.06,
+
                     }}
                     animate={{
-                        opacity: 1,
-                        scale: 1,
+
                     }}
                     exit={{
-                        opacity: 0,
-                        scale: 1.02,
+
                     }}
                     transition={{
                         opacity: {
-                            duration: 0.9,
+
                         },
                         scale: {
                             duration: 6,
@@ -118,8 +131,7 @@ export default function Hero() {
                         src={slide.image}
                         alt={slide.title}
                         fill
-                        priority={currentSlide === 0}
-                        loading={currentSlide === 0 ? "eager" : "lazy"}
+                        priority
                         sizes="100vw"
                         className="object-cover"
                     />
@@ -162,7 +174,9 @@ export default function Hero() {
                         className="mx-auto w-full max-w-6xl text-center"
                     >
 
-                        {/* TAG */}
+                        {/* =================================================
+                            TAG
+                        ================================================= */}
                         <motion.div
                             initial={{
                                 opacity: 0,
@@ -185,7 +199,9 @@ export default function Hero() {
                             </span>
                         </motion.div>
 
-                        {/* HEADING */}
+                        {/* =================================================
+                            HEADING
+                        ================================================= */}
                         <motion.h1
                             initial={{
                                 opacity: 0,
@@ -220,7 +236,9 @@ export default function Hero() {
                             )}
                         </motion.h1>
 
-                        {/* DESCRIPTION */}
+                        {/* =================================================
+                            DESCRIPTION
+                        ================================================= */}
                         <motion.p
                             initial={{
                                 opacity: 0,
@@ -239,7 +257,9 @@ export default function Hero() {
                             {slide.description}
                         </motion.p>
 
-                        {/* BUTTONS */}
+                        {/* =================================================
+                            BUTTONS
+                        ================================================= */}
                         <motion.div
                             initial={{
                                 opacity: 0,
@@ -256,6 +276,7 @@ export default function Hero() {
                             className="mt-9 flex flex-wrap items-center justify-center gap-4"
                         >
 
+                            {/* PRIMARY BUTTON */}
                             <Link
                                 href="/products"
                                 className="group flex items-center gap-3 rounded-full bg-red-600 py-2 pl-7 pr-2 text-sm font-bold text-white shadow-xl shadow-red-600/30 transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:text-base"
@@ -271,6 +292,7 @@ export default function Hero() {
                                 </span>
                             </Link>
 
+                            {/* SECONDARY BUTTON */}
                             <Link
                                 href="/contact"
                                 className="rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-gray-900 sm:text-base"
@@ -290,6 +312,7 @@ export default function Hero() {
             ================================================= */}
             <div className="absolute bottom-28 left-1/2 z-30 flex -translate-x-1/2 flex-col items-center gap-5">
 
+                {/* PROGRESS BAR */}
                 <div className="h-[2px] w-32 overflow-hidden rounded-full bg-white/25 sm:w-48">
                     <motion.div
                         className="h-full bg-red-500"
@@ -303,7 +326,7 @@ export default function Hero() {
                     />
                 </div>
 
-                {/* Optional clickable dots */}
+                {/* CLICKABLE DOTS */}
                 <div className="flex items-center gap-2">
                     {slides.map((_, index) => (
                         <button

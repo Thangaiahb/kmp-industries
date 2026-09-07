@@ -438,9 +438,9 @@ export default function ContactPage() {
                                 </h3>
 
                                 <p className="mt-5 max-w-md text-sm leading-7 text-white/55">
-                                    KMP Industries
+                                    No. 32/1, P.N. Palayam Road,
                                     <br />
-                                    Industrial Estate,
+                                    Ganapathy,
                                     <br />
                                     Coimbatore,
                                     <br />
