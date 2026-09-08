@@ -32,7 +32,7 @@ const slides = [
         secondary: "Talk to Our Team",
     },
     {
-        image: "/images/hero/one (2).png",
+        image: "/images/hero/one (3).png",
         tag: "QUALITY · ENGINEERING · TRUST",
         title: "Reliable Solutions",
         highlight: "For Every Water Need.",
