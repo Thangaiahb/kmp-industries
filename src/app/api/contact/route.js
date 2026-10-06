@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request) {
     try {
         const body = await request.json();
@@ -25,6 +23,23 @@ export async function POST(request) {
             );
         }
 
+        // Read API key at runtime
+        const apiKey = process.env["RESEND_API_KEY"];
+
+        if (!apiKey) {
+            console.error("RESEND_API_KEY is not configured.");
+
+            return Response.json(
+                {
+                    success: false,
+                    message: "Email service is not configured.",
+                },
+                { status: 500 }
+            );
+        }
+
+        const resend = new Resend(apiKey);
+
         const { data, error } = await resend.emails.send({
             from: "KMP Industries <onboarding@resend.dev>",
             to: ["arunthangaiahb@gmail.com"],
@@ -46,7 +61,7 @@ export async function POST(request) {
         });
 
         if (error) {
-            console.error(error);
+            console.error("Resend error:", error);
 
             return Response.json(
                 {
@@ -64,7 +79,7 @@ export async function POST(request) {
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("Contact API error:", error);
 
         return Response.json(
             {
