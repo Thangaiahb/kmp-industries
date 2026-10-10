@@ -141,7 +141,7 @@ export default function AboutSection() {
                                 </p>
 
                                 <p className="mt-2 max-w-md text-2xl font-bold leading-tight text-white sm:text-3xl">
-                                    Reliable engineering for demanding water applications.
+                                    Reliable engineering for demanding water  applications.
                                 </p>
 
                             </div>
